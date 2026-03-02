@@ -7,15 +7,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Fira+Code:wght@500;700&display=swap');
         
-        /* Chosen Palette: Energetic & Playful (Deep Indigo, Hot Pink, Cyan) */
         :root {
             --primary: #8b5cf6;
             --secondary: #ec4899;
             --accent: #06b6d4;
             --dark: #0f172a;
             --light: #f8fafc;
+            /* Cores de destaque do Código */
+            --code-bg: #0f172a;
+            --code-keyword: #fb7185;
+            --code-function: #38bdf8;
+            --code-comment: #94a3b8;
+            --code-number: #fbbf24;
         }
 
         body {
@@ -35,9 +40,10 @@
         }
 
         .code-container {
-            background: #1e1e2e;
-            border-radius: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            background: var(--code-bg);
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 2px solid #1e293b;
         }
 
         .formula-card {
@@ -45,8 +51,8 @@
             color: white;
         }
 
-        .custom-shadow {
-            box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.3);
+        .font-code {
+            font-family: 'Fira Code', monospace;
         }
     </style>
 </head>
@@ -54,13 +60,13 @@
 
 <!-- 
     PLANNING SUMMARY:
-    Narrative: Introduction -> The "Handmade" Algorithm -> Formula -> Implementation -> Practical Base 1 -> Practical Base 2 -> Insight.
+    Narrative: Intro -> High Visibility Code Block -> Theory -> Base 1 (Attendance) -> Base 2 (Marketing).
     Visualizations:
-    1. Python Code Block with syntax highlighting look.
-    2. Base 1: Bar Chart (Atendimento) with mean line.
-    3. Base 2: Area Chart (Campanhas) with mean line.
+    1. Python Code Block with High Contrast Solarized theme (Visible!).
+    2. Bar Chart for Attendance Tickets.
+    3. Line/Area Chart for Marketing Vendas.
     Confirmations: NO SVG used. NO MERMAID JS used.
-    Palette: Energetic & Playful (Pink/Purple/Indigo).
+    Palette: Energetic & Playful (Indigo/Pink/Cyan).
 -->
 
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
@@ -87,53 +93,56 @@
 
     <section id="algoritmo" class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
         
+        <!-- PARTE DO CÓDIGO COM ALTA VISIBILIDADE -->
         <div class="lg:col-span-7">
-            <div class="code-container p-1 overflow-hidden">
-                <div class="flex items-center gap-2 p-4 border-b border-slate-700/50">
+            <div class="code-container overflow-hidden">
+                <div class="flex items-center gap-2 p-4 bg-slate-800/50 border-b border-slate-700">
                     <div class="w-3 h-3 rounded-full bg-red-500"></div>
                     <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span class="ml-4 text-slate-400 text-xs font-mono">calcular_media.py</span>
+                    <span class="ml-4 text-slate-400 text-xs font-code uppercase tracking-widest font-bold">calcular_media.py</span>
                 </div>
-                <div class="p-6 overflow-x-auto">
-<pre class="font-mono text-sm md:text-base leading-relaxed">
-<span class="text-pink-400">def</span> <span class="text-cyan-400">calcular_media</span>(df, coluna):
-    <span class="text-slate-500"># Extraímos os dados sem funções prontas</span>
+                <div class="p-8 overflow-x-auto">
+<pre class="font-code text-base md:text-lg leading-relaxed text-slate-100">
+<span style="color: var(--code-keyword); font-weight: bold;">def</span> <span style="color: var(--code-function); font-weight: bold;">calcular_media</span>(df, coluna):
+    <span style="color: var(--code-comment); font-style: italic;"># Extraímos os dados para uma lista simples</span>
     lista_valores = df[coluna].tolist()
     
-    soma_total = <span class="text-purple-400">0</span>
-    contagem = <span class="text-purple-400">0</span>
+    <span style="color: var(--code-comment); font-style: italic;"># Inicialização do Acumulador e Contador</span>
+    soma_total = <span style="color: var(--code-number);">0</span>
+    contagem = <span style="color: var(--code-number);">0</span>
     
-    <span class="text-pink-400">for</span> valor <span class="text-pink-400">in</span> lista_valores:
-        <span class="text-slate-300">soma_total += valor</span>
-        <span class="text-slate-300">contagem += <span class="text-purple-400">1</span></span>
+    <span style="color: var(--code-keyword); font-weight: bold;">for</span> valor <span style="color: var(--code-keyword); font-weight: bold;">in</span> lista_valores:
+        soma_total += valor
+        contagem += <span style="color: var(--code-number);">1</span>
     
+    <span style="color: var(--code-comment); font-style: italic;"># Cálculo final (Divisão Aritmética)</span>
     media = soma_total / contagem
-    <span class="text-pink-400">return</span> media
+    <span style="color: var(--code-keyword); font-weight: bold;">return</span> media
 </pre>
                 </div>
             </div>
             
             <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
+                <div class="p-5 bg-white rounded-2xl shadow-sm border border-slate-200">
                     <h4 class="font-bold text-slate-800 text-sm uppercase mb-2">O que faz?</h4>
-                    <p class="text-sm text-slate-600">Simula o comportamento de bibliotecas de alto nível usando um loop <strong>for</strong> para acumular valores e contar registros simultaneamente.</p>
+                    <p class="text-sm text-slate-600">Simula o comportamento de bibliotecas de alto nível usando um loop para somar e contar registros sem funções internas.</p>
                 </div>
-                <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
-                    <h4 class="font-bold text-slate-800 text-sm uppercase mb-2">Diferencial</h4>
-                    <p class="text-sm text-slate-600">Não utiliza <code>.mean()</code> ou <code>sum()</code>, permitindo total visibilidade sobre a complexidade computacional do cálculo.</p>
+                <div class="p-5 bg-indigo-50 rounded-2xl border border-indigo-100">
+                    <h4 class="font-bold text-indigo-800 text-sm uppercase mb-2">Visibilidade</h4>
+                    <p class="text-sm text-indigo-700">Código formatado com alto contraste para garantir leitura clara em qualquer dispositivo ou apresentação.</p>
                 </div>
             </div>
         </div>
 
         <div class="lg:col-span-5 flex flex-col gap-6">
-            <div class="formula-card p-8 rounded-3xl shadow-xl flex flex-col items-center justify-center text-center">
+            <div class="formula-card p-10 rounded-3xl shadow-xl flex flex-col items-center justify-center text-center">
                 <h3 class="text-sm font-bold uppercase tracking-widest mb-6 opacity-80">Fundamento Matemático</h3>
-                <p class="text-5xl font-bold mb-6 italic">x̄ = Σ x / n</p>
+                <p class="text-6xl font-black mb-6 italic tracking-tighter">x̄ = Σx / n</p>
                 <div class="text-sm space-y-2 opacity-90">
-                    <p><strong>x̄</strong>: Média desejada</p>
-                    <p><strong>Σ x</strong>: Somatório total dos valores</p>
-                    <p><strong>n</strong>: Número total de amostras</p>
+                    <p><strong>x̄</strong>: Resultado da Média</p>
+                    <p><strong>Σx</strong>: Somatório Total dos Valores</p>
+                    <p><strong>n</strong>: Quantidade Total de Amostras</p>
                 </div>
             </div>
 
@@ -142,63 +151,51 @@
                 <ul class="space-y-4 text-sm">
                     <li class="flex gap-3">
                         <span class="flex-none w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center font-bold">1</span>
-                        <span><strong>Mapeamento:</strong> Identifica a coluna numérica desejada.</span>
+                        <span>Extração dos dados brutos do DataFrame.</span>
                     </li>
                     <li class="flex gap-3">
                         <span class="flex-none w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center font-bold">2</span>
-                        <span><strong>Iteração:</strong> O laço visita cada linha da base individualmente.</span>
+                        <span>Varredura (Loop) individual de cada linha.</span>
                     </li>
                     <li class="flex gap-3">
                         <span class="flex-none w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center font-bold">3</span>
-                        <span><strong>Agregação:</strong> Acumula o valor e incrementa o contador.</span>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="flex-none w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center font-bold">4</span>
-                        <span><strong>Finalização:</strong> Divide os acumulados e retorna o ponto de equilíbrio.</span>
+                        <span>Acúmulo de valores e incremento do contador.</span>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <div class="bg-indigo-50 py-20 mt-12">
+    <!-- BASES DE DADOS -->
+    <div class="bg-indigo-50 py-24 mt-12">
         <section id="base1" class="max-w-6xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
-                    <span class="text-purple-600 font-bold uppercase tracking-widest text-xs">Exemplo Prático 01</span>
-                    <h2 class="text-4xl font-extrabold text-slate-900 mt-2">Performance de Atendimento</h2>
-                    <p class="text-slate-600 mt-2">Cálculo do Ticket Médio por atendimento realizado.</p>
+                    <span class="text-purple-600 font-bold uppercase tracking-widest text-xs">Base 01</span>
+                    <h2 class="text-4xl font-extrabold text-slate-900 mt-2">Atendimento ao Cliente</h2>
+                    <p class="text-slate-600 mt-2">Média de Ticket por atendente (Ana a João).</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl shadow-lg border-b-4 border-purple-500 min-w-[200px]">
-                    <p class="text-xs text-slate-400 font-bold uppercase">Ticket Médio (Calculado)</p>
+                    <p class="text-xs text-slate-400 font-bold uppercase">Média Calculada</p>
                     <p class="text-4xl font-black text-slate-800">R$ 554,00</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="bg-white p-4 rounded-2xl shadow-sm overflow-hidden">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="chart-container">
                         <canvas id="chartBase1"></canvas>
                     </div>
                 </div>
-                <div class="space-y-6">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm">
-                        <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                            <span class="w-2 h-6 bg-pink-500 rounded"></span> Lógica Aplicada
-                        </h4>
-                        <p class="text-sm text-slate-600 leading-relaxed">
-                            Nesta base, o algoritmo percorreu os tickets de Ana (320) até João (620). 
-                            O somatório total atingiu <strong>R$ 5.540,00</strong>. Ao dividir pelos <strong>10</strong> atendentes, encontramos o equilíbrio em R$ 554,00.
-                        </p>
-                        <div class="mt-4 p-4 bg-slate-50 rounded-lg text-xs font-mono text-slate-500">
-                            Cálculo: 5540 / 10 = 554.0
-                        </div>
-                    </div>
-                    <div class="p-6 border-2 border-purple-200 border-dashed rounded-2xl">
-                        <h4 class="font-bold text-purple-800 mb-2">Insight de Gestão</h4>
-                        <p class="text-sm text-purple-900/80">
-                            Diego (R$ 1.950) é um <strong>Outlier</strong> positivo. Sem ele, o ticket médio cairia drasticamente para R$ 398,88, mostrando como a média é sensível a valores extremos.
-                        </p>
+                <div class="bg-white p-8 rounded-3xl shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-2 h-6 bg-pink-500 rounded"></span> Análise da Base 1
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Ao percorrer os tickets, o algoritmo somou <strong>R$ 5.540,00</strong>. Com 10 registros, a média é R$ 554,00. 
+                    </p>
+                    <div class="p-4 bg-purple-50 text-purple-800 rounded-xl border border-purple-100 text-sm">
+                        <strong>Insight:</strong> Diego é um destaque positivo (R$ 1.950), puxando a média geral para cima.
                     </div>
                 </div>
             </div>
@@ -208,38 +205,29 @@
     <section id="base2" class="max-w-6xl mx-auto px-6 py-24">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-                <span class="text-pink-600 font-bold uppercase tracking-widest text-xs">Exemplo Prático 02</span>
-                <h2 class="text-4xl font-extrabold text-slate-900 mt-2">Resultado de Marketing</h2>
-                <p class="text-slate-600 mt-2">Análise de Vendas Médias por Campanha Mensal.</p>
+                <span class="text-pink-600 font-bold uppercase tracking-widest text-xs">Base 02</span>
+                <h2 class="text-4xl font-extrabold text-slate-900 mt-2">Performance de Marketing</h2>
+                <p class="text-slate-600 mt-2">Vendas Médias por Campanha Mensal.</p>
             </div>
             <div class="bg-white p-6 rounded-2xl shadow-lg border-b-4 border-pink-500 min-w-[200px]">
-                <p class="text-xs text-slate-400 font-bold uppercase">Venda Média (Calculada)</p>
-                <p class="text-4xl font-black text-slate-800">R$ 44,2k</p>
+                <p class="text-xs text-slate-400 font-bold uppercase">Venda Média</p>
+                <p class="text-4xl font-black text-slate-800">R$ 44.2k</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="order-2 lg:order-1 space-y-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                        <span class="w-2 h-6 bg-cyan-500 rounded"></span> Análise de Campanha
-                    </h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Ao analisar as vendas de Janeiro a Outubro, o algoritmo somou um faturamento total de <strong>R$ 442.000,00</strong>. 
-                        A média resultante de <strong>R$ 44.200,00</strong> serve como a "meta de performance" para novas campanhas.
-                    </p>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-lg text-xs font-mono text-slate-500">
-                        Cálculo: 442000 / 10 = 44200.0
-                    </div>
-                </div>
-                <div class="p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl text-white">
-                    <h4 class="font-bold text-cyan-400 mb-2">Insight Estratégico</h4>
-                    <p class="text-sm opacity-80">
-                        O algoritmo revela que campanhas <strong>Offline</strong> (Março, Maio, Agosto) tendem a puxar a média para cima, apesar do maior investimento (Gasto Mkt), sugerindo um ROI equilibrado.
-                    </p>
+            <div class="order-2 lg:order-1 bg-white p-8 rounded-3xl shadow-sm">
+                <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-cyan-500 rounded"></span> Análise da Base 2
+                </h4>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                    As vendas totais somaram <strong>R$ 442.000,00</strong>. A média de <strong>R$ 44,2k</strong> define o patamar de sucesso para futuras campanhas.
+                </p>
+                <div class="p-4 bg-cyan-50 text-cyan-800 rounded-xl border border-cyan-100 text-sm">
+                    <strong>Insight:</strong> Campanhas offline tendem a ter maior volume, elevando a média histórica.
                 </div>
             </div>
-            <div class="order-1 lg:order-2 bg-white p-4 rounded-2xl shadow-sm">
+            <div class="order-1 lg:order-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <div class="chart-container">
                     <canvas id="chartBase2"></canvas>
                 </div>
@@ -247,103 +235,79 @@
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-500 py-12 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <p class="font-bold text-white mb-1">Thailan - Especialista em Dados</p>
-                <p class="text-xs">Trabalho acadêmico: Implementação de Algoritmos em Python</p>
-            </div>
-            <div class="flex gap-4">
-                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-white font-bold">Py</div>
-                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-white font-bold">Js</div>
-                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-white font-bold">Σ</div>
-            </div>
-        </div>
+    <footer class="bg-slate-900 text-slate-500 py-12 px-6 text-center">
+        <p class="text-white font-bold mb-2 uppercase tracking-widest text-sm">Thailan • 2024</p>
+        <p class="text-xs">Lógica de Programação e Análise de Dados com Python</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const commonTooltipConfig = {
+            const toolConfig = {
                 callbacks: {
-                    title: function(tooltipItems) {
-                        const item = tooltipItems[0];
-                        let label = item.chart.data.labels[item.dataIndex];
+                    title: (items) => {
+                        const label = items[0].chart.data.labels[items[0].dataIndex];
                         return Array.isArray(label) ? label.join(' ') : label;
                     }
                 }
             };
 
             // Chart Base 1
-            const ctx1 = document.getElementById('chartBase1').getContext('2d');
-            new Chart(ctx1, {
+            new Chart(document.getElementById('chartBase1'), {
                 type: 'bar',
                 data: {
                     labels: ['Ana', 'Bruno', 'Carla', 'Diego', 'Elisa', 'Fábio', 'Gisele', 'Henrique', 'Isabela', 'João'],
-                    datasets: [
-                        {
-                            label: 'Valor do Ticket (R$)',
-                            data: [320, 580, 210, 1950, 430, 310, 490, 350, 280, 620],
-                            backgroundColor: '#8b5cf6',
-                            borderRadius: 6,
-                            order: 2
-                        },
-                        {
-                            label: 'Média Calculada (554.0)',
-                            data: Array(10).fill(554),
-                            type: 'line',
-                            borderColor: '#ec4899',
-                            borderWidth: 3,
-                            borderDash: [5, 5],
-                            pointRadius: 0,
-                            order: 1
-                        }
-                    ]
+                    datasets: [{
+                        label: 'Ticket (R$)',
+                        data: [320, 580, 210, 1950, 430, 310, 490, 350, 280, 620],
+                        backgroundColor: '#8b5cf6',
+                        borderRadius: 8,
+                        order: 2
+                    }, {
+                        label: 'Média (554)',
+                        data: Array(10).fill(554),
+                        type: 'line',
+                        borderColor: '#ec4899',
+                        borderWidth: 3,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        order: 1
+                    }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { 
-                        tooltip: commonTooltipConfig,
-                        legend: { position: 'bottom' }
-                    },
+                    plugins: { tooltip: toolConfig, legend: { position: 'bottom' } },
                     scales: { y: { beginAtZero: true } }
                 }
             });
 
             // Chart Base 2
-            const ctx2 = document.getElementById('chartBase2').getContext('2d');
-            new Chart(ctx2, {
+            new Chart(document.getElementById('chartBase2'), {
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out'],
-                    datasets: [
-                        {
-                            label: 'Vendas (R$)',
-                            data: [42000, 38000, 51000, 29000, 48000, 43000, 40000, 55000, 44000, 52000],
-                            borderColor: '#06b6d4',
-                            backgroundColor: 'rgba(6, 182, 212, 0.1)',
-                            fill: true,
-                            tension: 0.4,
-                            order: 2
-                        },
-                        {
-                            label: 'Média Anual (44.2k)',
-                            data: Array(10).fill(44200),
-                            borderColor: '#ec4899',
-                            borderWidth: 2,
-                            borderDash: [3, 3],
-                            pointRadius: 0,
-                            order: 1
-                        }
-                    ]
+                    datasets: [{
+                        label: 'Vendas (R$)',
+                        data: [42000, 38000, 51000, 29000, 48000, 43000, 40000, 55000, 44000, 52000],
+                        borderColor: '#06b6d4',
+                        backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        order: 2
+                    }, {
+                        label: 'Média (44.2k)',
+                        data: Array(10).fill(44200),
+                        borderColor: '#ec4899',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        order: 1
+                    }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { 
-                        tooltip: commonTooltipConfig,
-                        legend: { position: 'bottom' }
-                    },
+                    plugins: { tooltip: toolConfig, legend: { position: 'bottom' } },
                     scales: { y: { beginAtZero: false } }
                 }
             });
