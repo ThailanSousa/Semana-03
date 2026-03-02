@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Algoritmo de Média Aritmética</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --bg: #f8fafc;
+            --text: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
+
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .step-node {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .step-node::before {
+            content: "";
+            position: absolute;
+            left: -12px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- 
+    PLANNING SUMMARY:
+    Narrative: Introduction -> Theoretical Base -> Implementation (Code) -> Execution (Line-by-line) -> Data Visualization -> Final Insight.
+    Visualizations: 
+    1. Single Big Number for final Mean result.
+    2. Bar Chart (Chart.js) to compare student grades and show the mean threshold.
+    3. CSS-based Flowchart for the logic steps.
+    Confirmations: NO SVG used. NO MERMAID JS used. 
+    Palette: Brilliant Blues & Purples.
+-->
+
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 px-6 text-center shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Algoritmo de Média Aritmética</h1>
+            <p class="text-xl opacity-90 font-light">Implementação de Lógica de Programação Pura em Python para Análise de Dados</p>
+            <div class="mt-8 flex justify-center gap-4">
+                <span class="bg-blue-500/30 px-4 py-1 rounded-full text-sm font-semibold border border-white/20 uppercase tracking-widest">Thailan</span>
+                <span class="bg-blue-500/30 px-4 py-1 rounded-full text-sm font-semibold border border-white/20 uppercase tracking-widest">Algoritmos</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center">
+            <div>
+                <h2 class="text-3xl font-bold mb-6 text-blue-800">1. O que o algoritmo faz?</h2>
+                <p class="text-lg leading-relaxed mb-6">
+                    Este algoritmo foi desenvolvido para calcular o centro de massa de um conjunto de dados sem utilizar funções de alto nível como <code class="bg-blue-100 px-1 rounded">.mean()</code> ou <code class="bg-blue-100 px-1 rounded">sum()</code>. 
+                    Ele opera através de <strong>iteração direta</strong>, garantindo controle total sobre o processo de soma e contagem.
+                </p>
+                <div class="bg-white p-6 rounded-2xl shadow-xl border-l-8 border-indigo-500">
+                    <h3 class="font-bold text-indigo-700 uppercase text-sm mb-4 tracking-widest">Fluxo Lógico</h3>
+                    <div class="space-y-6">
+                        <div class="step-node"><p class="font-semibold">Coleta:</p><span class="text-sm">Extrai os dados brutos da coluna do DataFrame.</span></div>
+                        <div class="step-node"><p class="font-semibold">Acúmulo:</p><span class="text-sm">Percorre a lista somando cada valor individualmente.</span></div>
+                        <div class="step-node"><p class="font-semibold">Divisão:</p><span class="text-sm">Calcula o quociente entre a soma e a quantidade total.</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-10 rounded-3xl shadow-2xl text-center">
+                <h2 class="text-2xl font-bold mb-8 text-slate-800 uppercase tracking-wider">2. Base Teórica</h2>
+                <div class="py-12 bg-slate-50 rounded-2xl mb-6">
+                    <p class="text-5xl font-serif text-blue-600 mb-4 font-bold">x̄ = Σ xᵢ / n</p>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-sm font-medium">
+                    <div class="p-4 bg-blue-50 rounded-xl">
+                        <span class="block text-2xl text-blue-600">x̄</span>
+                        Média Final
+                    </div>
+                    <div class="p-4 bg-indigo-50 rounded-xl">
+                        <span class="block text-2xl text-indigo-600">Σ</span>
+                        Somatório
+                    </div>
+                    <div class="p-4 bg-cyan-50 rounded-xl">
+                        <span class="block text-2xl text-cyan-600">n</span>
+                        Amostragem
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="bg-slate-900 rounded-3xl p-8 shadow-2xl overflow-hidden relative">
+                <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl text-white font-bold">PYTHON</div>
+                <h2 class="text-3xl font-bold mb-8 text-blue-400">3. Código da Função</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-inner">
+<pre class="code-font text-blue-300 text-sm md:text-base leading-relaxed">
+<span class="text-purple-400 font-bold">def</span> <span class="text-green-400">calcular_media</span>(df, coluna):
+    <span class="text-slate-500"># Converte para lista comum</span>
+    lista_valores = df[coluna].tolist()
+    
+    soma_total = <span class="text-orange-400">0</span>
+    contagem = <span class="text-orange-400">0</span>
+    
+    <span class="text-purple-400 font-bold">for</span> valor <span class="text-purple-400 font-bold">in</span> lista_valores:
+        soma_total += valor
+        contagem += <span class="text-orange-400">1</span>
+    
+    media = soma_total / contagem
+    <span class="text-purple-400 font-bold">return</span> media
+</pre>
+                    </div>
+
+                    <div class="flex flex-col justify-center space-y-4">
+                        <h3 class="text-xl font-bold text-white mb-2">4. Explicação Linha a Linha</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-800/50 p-3 rounded border-l-4 border-green-400 text-slate-300 text-sm">
+                                <strong class="text-green-400">Linha 1:</strong> Define a função com parâmetros de entrada.
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded border-l-4 border-blue-400 text-slate-300 text-sm">
+                                <strong class="text-blue-400">Linha 3:</strong> Extração dos dados para processamento iterativo.
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded border-l-4 border-yellow-400 text-slate-300 text-sm">
+                                <strong class="text-yellow-400">Linha 5-6:</strong> Inicialização dos acumuladores (Estado zero).
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded border-l-4 border-purple-400 text-slate-300 text-sm">
+                                <strong class="text-purple-400">Linha 8-10:</strong> O "Coração": Laço que soma e conta simultaneamente.
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded border-l-4 border-red-400 text-slate-300 text-sm">
+                                <strong class="text-red-400">Linha 12:</strong> Finalização do cálculo aritmético.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-3xl p-10 shadow-xl border border-slate-100">
+            <h2 class="text-3xl font-bold mb-10 text-center text-slate-800">5. Exemplo Prático e Visualização</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="md:col-span-1 bg-slate-50 p-6 rounded-2xl">
+                    <h3 class="font-bold text-slate-700 mb-4 uppercase text-xs tracking-widest">Dataset: Notas</h3>
+                    <div class="overflow-hidden rounded-lg border border-slate-200">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-200">
+                                <tr><th class="p-3">Aluno</th><th class="p-3">Nota</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-slate-200">
+                                    <td class="p-3 font-medium">Ana</td>
+                                    <td class="p-3">8.0</td>
+                                </tr>
+                                <tr class="border-t border-slate-200 bg-white">
+                                    <td class="p-3 font-medium">Bob</td>
+                                    <td class="p-3">6.0</td>
+                                </tr>
+                                <tr class="border-t border-slate-200">
+                                    <td class="p-3 font-medium">Cris</td>
+                                    <td class="p-3">10.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-6 p-4 bg-indigo-600 rounded-xl text-white">
+                        <p class="text-xs opacity-80 uppercase font-bold">Resultado do Cálculo</p>
+                        <p class="text-3xl font-black mt-1">8.0</p>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 flex flex-col justify-center">
+                    <div class="chart-container">
+                        <canvas id="gradesChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-slate-500 mt-4 italic">Comparativo de Notas Individuais vs. Média da Turma</p>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 p-8 rounded-2xl border-2 border-dashed border-blue-200">
+                <div class="flex items-start gap-4">
+                    <div class="text-4xl">💡</div>
+                    <div>
+                        <h4 class="text-xl font-bold text-blue-900 mb-2">Insight Analítico</h4>
+                        <p class="text-blue-800 leading-relaxed">
+                            A média de <strong>8.0</strong> funciona como o centro de gravidade das notas. Note que o "8" da Ana está exatamente na média, enquanto o "6" do Bob está 2 pontos abaixo e o "10" da Cris está 2 pontos acima. Isso demonstra a propriedade da média de equilibrar as dispersões. Em análise de dados, isso nos dá uma visão rápida da performance, mas exige cuidado com valores extremos (outliers).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-500 py-10 px-6 text-center text-sm">
+        <p>© 2024 • Desenvolvido por Thailan • Disciplina de Algoritmos e Programação</p>
+        <p class="mt-2 text-slate-700">SPA Desenvolvida com HTML, Tailwind CSS e Chart.js</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('gradesChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Ana', 'Bob', 'Cris'],
+                    datasets: [
+                        {
+                            label: 'Nota do Aluno',
+                            data: [8, 6, 10],
+                            backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(139, 92, 246, 0.7)', 'rgba(6, 182, 212, 0.7)'],
+                            borderColor: ['#3b82f6', '#8b5cf6', '#06b6d4'],
+                            borderWidth: 2,
+                            borderRadius: 8,
+                            order: 2
+                        },
+                        {
+                            label: 'Média Final (8.0)',
+                            data: [8, 8, 8],
+                            type: 'line',
+                            borderColor: '#ef4444',
+                            borderWidth: 3,
+                            borderDash: [5, 5],
+                            fill: false,
+                            pointRadius: 0,
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 12,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 15,
+                                font: {
+                                    family: 'Inter',
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1e293b',
+                            padding: 12,
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 13 },
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                      return label.join(' ');
+                                    } else {
+                                      return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
